@@ -1,0 +1,60 @@
+<template>
+    <div class="chart">
+        <div class="chart__section" v-for="item in data.values" :key="item.value" :style="{background: item.color, height: 100 + '%', width: item.width + '%'}"><h5 class="value">{{item.value}}</h5></div>
+        <div class="chart__mark" :style="{left: data.mark.width + '%'}"><h5 class="value mark-value">{{data.mark.value}}</h5></div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "BarChart",
+    props: {
+        chart: Object,
+    },
+    computed: {
+        data() {
+            let differences = [75, 15, ""]
+            let colors = ["#52ad30", "#f9da08", "#c31c14"]
+            for (let i = 0; i < this.chart.values.length; i++) {
+                this.chart.values[i].width = differences[i]
+                this.chart.values[i].color = colors[i]
+                console.log("Процент секции " + this.chart.values[i].width + "%")
+            }
+            this.chart.mark.width = (100*(this.chart.mark.value)*0.6)/this.chart.values[1].value
+            //this.chart.values[this.items.items.length-1].value = ""
+            return this.chart
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.chart {
+    height: 10px;
+    width: 100%;
+    display: flex;
+    position: relative;
+
+    &__section {
+        text-align: end;
+
+        &:first-child {
+            border-radius: 10px 0 0 10px;
+        }
+
+        &:nth-last-child(2) {
+            border-radius: 0 10px 10px 0;
+        }
+    }
+
+    &__mark {
+        position: absolute;
+        top: -5px;
+        background-color: #000;
+        width: 2px;
+        height: 20px;
+    }
+
+
+}
+</style>

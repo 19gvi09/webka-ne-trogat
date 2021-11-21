@@ -1,15 +1,13 @@
 <template>
-    <div>
         <table class="table">
             <tr class="row" v-if="table.heading">
                 <th class="col" v-for="item in table.heading" :key="item">{{ item }}</th>
             </tr>
             <tr class="row" v-for="item in table.data" :key="item">
-                <th class="col">{{ item.name }}</th>
+                <th :width="table.width" class="col">{{ item.name }}</th>
                 <td class="col" v-for="value in item.values" :key="value">{{ value }}</td>
             </tr>
         </table>
-    </div>
 </template>
 
 <script>

@@ -13,16 +13,18 @@ export default {
     },
     computed: {
         data() {
-            let differences = [75, 15, ""]
+            let differences = [75, 15, 10]
             let colors = ["#52ad30", "#f9da08", "#c31c14"]
-            for (let i = 0; i < this.chart.values.length; i++) {
-                this.chart.values[i].width = differences[i]
-                this.chart.values[i].color = colors[i]
-                console.log("Процент секции " + this.chart.values[i].width + "%")
+            let data = this.chart
+            data.values.push({})
+            for (let i = 0; i < data.values.length; i++) {
+                data.values[i].width = differences[i]
+                data.values[i].color = colors[i]
+                //console.log("Процент секции " + data.values[i].width + "%")
             }
-            this.chart.mark.width = (100*(this.chart.mark.value)*0.6)/this.chart.values[1].value
-            //this.chart.values[this.items.items.length-1].value = ""
-            return this.chart
+            data.mark.width = (100*(data.mark.value)*0.6)/data.values[1].value
+            //data.values[this.items.items.length-1].value = ""
+            return data
         }
     }
 }
@@ -37,6 +39,7 @@ export default {
 
     &__section {
         text-align: end;
+        position: relative;
 
         &:first-child {
             border-radius: 10px 0 0 10px;
@@ -55,6 +58,11 @@ export default {
         height: 20px;
     }
 
-
+    .value {
+        position: absolute;
+        right: 0;
+        top: -15px;
+        margin: 0;
+    }
 }
 </style>

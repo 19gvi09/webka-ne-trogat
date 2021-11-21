@@ -1,36 +1,30 @@
 <template>
     <div>
-        <h4 class="header">Отчет об агрегированном объеме значимых рисков и структура потребления капитала</h4>
+        <h4 class="header">Отчет об агрегированном объеме значимых рисков и структура потребления капитала Банковской Группы</h4>
         <div class="container">
-            <ColumnChart :chart="chart1" />
-            <ColumnChart :chart="chart2" />
-            <div class="wrapper">
-                <div class="item mt-10" v-for="item in data.headers" :key="item.name">
-                    <h4>{{ item.name }}</h4>
-                    <h4>{{ item.value }} млрд. руб.</h4>
-                </div>
-                <ul>
-                    <div class="item" v-for="item in data.items" :key="item.name">
-                        <li>{{ item.name }}</li>
-                        <h4>{{ item.value }} млрд. руб.</h4>
-                    </div>
-                </ul>
+            <ColumnChart :chart="risks1" />
+            <ColumnChart :chart="risks2" />
+            <div class="tables">
+                <Table class="mb-10" :table="table1" />
+                <Table :table="table2" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import ColumnChart from "./ColumnChart.vue"
+import ColumnChart from './ColumnChart.vue'
+import Table from './Table.vue'
 
 export default {
-    name: "CapitalStructure",
+    name: "CapitalStructureGroup",
     components: {
         ColumnChart,
+        Table
     },
     data() {
         return {
-            chart1: {
+            risks1: {
                 name: "Основной капитал, %",
                 data: [
                     {
@@ -49,7 +43,7 @@ export default {
                 place: true,
                 column: true,
             },
-            chart2: {
+            risks2: {
                 name: "Совокупный капитал, %",
                 data: [
                     {
@@ -69,32 +63,49 @@ export default {
                 column: true,
                 labelsHidden: true,
             },
-            data: {
-                headers: [
+            table1: {
+                heading: ["Компонент капитала", "Группа", "Банк", "МФК"],
+                data: [
                     {
                         name: "Совокупный капитал",
-                        value: 10,
+                        values: [10, 10, 10],
                     },
                     {
                         name: "Основной капитал, в т.ч.:",
-                        value: 10,
+                        values: [10, 10, 10],
                     },
-                ],
-                items: [
                     {
                         name: "Совокупный уровень рисков",
-                        value: 10,
+                        values: [10, 10, 10],
                     },
                     {
                         name: "Стресс-буфер",
-                        value: 10,
+                        values: [10, 10, 10],
                     },
                     {
-                        name: "Резерв капитала",
-                        value: 10,
+                        name: "Резерв по капиталу",
+                        values: [10, 10, 10],
                     },
-                ]
-            }
+                ],
+            },
+            table2: {
+                heading: ["Норматив", "Группа", "Банк", "МФК"],
+                data: [
+                    {
+                        name: "Н20.0 / Н1.0 / НМФК1",
+                        values: [10, 10, 10],
+                    },
+                    {
+                        name: "Н20.1 / Н1.1 / - ",
+                        values: [10, 10],
+                    },
+                    {
+                        name: "Н20.2 / Н1.2 / - ",
+                        values: [10, 10],
+                    },
+                ],
+                width: "75%"
+            },
         }
     }
 }
@@ -107,42 +118,24 @@ export default {
     color: #fff;
     padding: 20px 0;
     text-align: center;
+    margin: 20px 0 0;
 }
 
 .container {
     position: relative;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin: 0 30px;
+    padding: 20px 30px 0;
 }
 
-.wrapper {
-    border: 1px solid #a3a3a3;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 15px 0;
+.tables {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px 0 0;
+}
 
-    .item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        h4 {
-            margin: 0;
-        }
-
-        li {
-            margin: 0 10px 0 0;
-        }
-    }
-
-    ul {
-        margin: 10px 0;
-    }
-
-    .mt-10 {
-        margin: 10px 0 0;
-    }
+.mb-10 {
+    margin-bottom: 10px;
 }
 </style>

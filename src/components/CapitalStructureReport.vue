@@ -1,10 +1,24 @@
 <template>
     <div>
-        <h4 class="header">Отчет о структуре капитала</h4>
+        <h4 class="header">Отчет о структуре капитала и нормативов</h4>
         <div class="container">
-            <Table :table="table1" />
-            <Table :table="table2" />
-            <h5>*-16,6% от фактической величины</h5>
+            <div>
+                <div>
+                    <h4>Капитал</h4>
+                    <Table :table="table1" />
+                </div>
+                <div class="desc">
+                    <h5>*-16,6% от фактической величины</h5>
+                    <h5>*НМФК1-норматив достаточности собственных средств</h5>
+                    <h5>*НМФК2-норматив ликвидности</h5>
+                    <h5>*НМФК3-максимальный размер риска на одного заемщика или группу связанных заемщиков</h5>
+                    <h5>*НМФК4-максимальный размер риска на связанное с микрофинансовой компанией лицо</h5>
+                </div>
+            </div>
+            <div>
+                <h4>Нормативы</h4>
+                <Table :table="table2" />
+            </div>
         </div>
     </div>
 </template>
@@ -34,19 +48,19 @@ export default {
             table2: {
                 data: [
                     {
-                        name: "НФМК1",
+                        name: "НФМК1*",
                         values: [`${461.09}%`],
                     },
                     {
-                        name: "НФМК2",
+                        name: "НФМК2*",
                         values: [`${36.4}%`],
                     },
                     {
-                        name: "НФМК1",
+                        name: "НФМК1*",
                         values: [`${0.01}%`],
                     },
                     {
-                        name: "НФМК2",
+                        name: "НФМК2*",
                         values: [`${0.01}%`],
                     },
                 ],
@@ -61,21 +75,23 @@ export default {
     width: 100%;
     background-color: #52ad30;
     color: #fff;
-    padding: 20px;
+    padding: 20px 0;
     text-align: center;
+    margin: 20px 0 0;
 }
 
 .container {
     position: relative;
     display: flex;
     justify-content: space-between;
-    margin: 0 30px;
+    padding: 0 30px;
+    background-color: #fafafa;
+}
 
+.desc {
+    padding: 20px 0 0;
     h5 {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        margin: 0;
+        margin: 5px 0 0;
     }
 }
 </style>
